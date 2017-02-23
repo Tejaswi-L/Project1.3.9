@@ -16,7 +16,7 @@ Aggregated results are stored in tournament.txt
 Unpublished work (c)2013 Project Lead The Way
 CSE Project 1.3.5 Collaborating on a Project
 Draft, Do Not Distribute
-Version 2/22/2017 ATTL  
+Version 2/22/2017 ATTL. 
 '''
 
 import random
@@ -201,15 +201,22 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     #
     elif player == 4:
         if getting_team_name:
-            return 'betray every 3rd round'
+            return 'It Can Be Anything'
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
-            size = len(history)
-            if(size%3==0): #the number of rounds played is a multiple of 3
-                return 'c'
+            if opponent_history[0:7]=='winning' : # Check to if partner/self are mactched
+                return 'c' # if so collude every time to avpid loss of points
+            elif len (opponent_history)==0: # Checks to see if first turn
+                return 'winning' # Acts as a identifier between partners
+            elif opponent_history[0:7] == 'bbbbbbb': # Checks if opponent is only betraying
+                return 5 # return int to so score does not change
             else:
-                return 'b'
+                end = random.randint(1,100) # generates a random number
+                if end == 49: # Checks to see if it is this number
+                    return 'c' # This will randomly throw a 'c' to break a streak
+                else:
+                    return opponent_history[-1] # DO what the opponent did last            
     
     
     
