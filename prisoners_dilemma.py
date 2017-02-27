@@ -205,11 +205,11 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
-            if opponent_history[0:7]=='winning' : # Check to if partner/self are mactched
+            if opponent_history[0:9]=='winning' : # Check to if partner/self are mactched
                 return 'c' # if so collude every time to avpid loss of points
             elif len (opponent_history)==0: # Checks to see if first turn
                 return 'winning' # Acts as a identifier between partners
-            elif opponent_history[0:7] == 'bbbbbbb': # Checks if opponent is only betraying
+            elif opponent_history[0:9] == 'bbbbbbb': # Checks if opponent is only betraying
                 return 5 # return int to so score does not change
             else:
                 end = random.randint(1,100) # generates a random number
@@ -257,16 +257,17 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     #
     elif player == 6:
         if getting_team_name:
-            return 'loyal vengeful'
+            return 'It Can Be Anything'
         else:
-            # use history, opponent_history, score, opponent_score
-            # to compute your strategy
-            if len(opponent_history)==0: #It's the first round: collude
+            if opponent_history[0:3]=='winning':
                 return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray is they were severely punished last time
+            elif len(opponent_history)==0
+                return 'winning' 
+            elif opponent_history[0:3] == 'bbbbbbb' :
+                return 5
             else:
-                return 'c' #otherwise collude
+                return 'b' 
+            
     
 
 
