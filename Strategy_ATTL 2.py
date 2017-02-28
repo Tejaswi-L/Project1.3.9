@@ -173,19 +173,18 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     ######
     ######
     #
-    elif player == 3:
-        if getting_team_name:
-            return 'loyal vengeful'
-        else:
-            # use history, opponent_history, score, opponent_score
-            # to compute your strategy
-            if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray is they were severely punished last time
-            else:
-                return 'c' #otherwise collude
-
+class TitForTat (player)
+    """A player starts by cooperaing and then mimcs previous move by opponent. """
+    def strategy(self, opponent):
+        """ Begins by playing 'C' : This is affected by the history of the opponent: the strategy simply repeats the last action of the opponent """
+        try:
+            return opponent.history[-1]
+        except IndexError:
+            return 'C'
+            
+    def __repr__(self):
+        """ The string method for the strategy. """
+        return "Tit For Tat"
 
 
 
