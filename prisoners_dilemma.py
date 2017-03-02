@@ -201,22 +201,15 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     #
     elif player == 4:
         if getting_team_name:
-            return 'It Can Be Anything'
+            return 'betray every 3rd round'
         else:
             # use history, opponent_history, score, opponent_score
             # to compute your strategy
-            if opponent_history[0:9]=='winning' : # Check to if partner/self are mactched
-                return 'c' # if so collude every time to avpid loss of points
-            elif len (opponent_history)==0: # Checks to see if first turn
-                return 'winning' # Acts as a identifier between partners
-            elif opponent_history[0:9] == 'bbbbbbb': # Checks if opponent is only betraying
-                return 5 # return int to so score does not change
+            size = len(history)
+            if(size%3==0): #the number of rounds played is a multiple of 3
+                return 'c'
             else:
-                end = random.randint(1,100) # generates a random number
-                if end == 49: # Checks to see if it is this number
-                    return 'c' # This will randomly throw a 'c' to break a streak
-                else:
-                    return opponent_history[-1] # DO what the opponent did last            
+                return 'b'           
     
     
     
